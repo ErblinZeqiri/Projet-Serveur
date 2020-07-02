@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}Modification d'un mail{% endblock %}
+{% block body %}
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<p>
+				Modifier le mail d'une personne :
+			</p>
+			<form method="POST" action="{{ url_for('mails_update') }}">
+                <table class="table table-bordered table-sm">
+                    <thead>
+                        <tr>
+                            <th>
+                                ID Mail
+                            </th>
+                            <th>
+                                Adresse mail
+                            </th>
+                        </tr>
+                    </thead>
+                    {% for row in data %}
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <input type="hidden" name= "ID_Mail_edit_html" value="{{ row.ID_Mail }}"/>
+                                </td>
+                                <td>
+                                    <input type = "text" name = "name_edit_Adresse_Mail_html" value="{{ row.Adresse_Mail }}"/>
+                                </td>
+                                <td>
+                                    <button class="btn btn-warning" type="submit">Update</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    {% endfor %}
+                </table>
+			</form>
+		</div>
+	</div>
+</div>
+{% endblock %}

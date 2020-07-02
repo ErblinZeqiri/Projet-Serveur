@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %} Ajout d'un mail{% endblock %}
+{% block body %}
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<p>
+				Ajouter un mail :
+			</p>
+			<form method="POST">
+				<div class="form-group">
+					<label for="Adresse_Mail_html">Adresse mail</label>
+					<input type ="text" class="form-control" id="Adresse_Mail_html" name="Adresse_Mail_html" />
+				</div>
+				<button type="submit" class="btn btn-primary">
+					Enregistrer le mail
+				</button>
+			</form>
+		</div>
+	</div>
+</div>
+{% endblock %}

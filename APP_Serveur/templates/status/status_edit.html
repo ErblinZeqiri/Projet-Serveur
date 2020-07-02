@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}Modification d'un status{% endblock %}
+{% block body %}
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<p>
+				Modifier un status :
+			</p>
+			<form method="POST" action="{{ url_for('status_update') }}">
+                <table class="table table-bordered table-sm">
+                    <thead>
+                        <tr>
+                            <th>
+                                ID Status
+                            </th>
+                            <th>
+                                Status
+                            </th>
+                        </tr>
+                    </thead>
+                    {% for row in data %}
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <input type="hidden" name= "ID_Status_edit_html" value="{{ row.ID_Status }}"/>
+                                </td>
+                                <td>
+                                    <input type = "text" name = "name_edit_Status_html" value="{{ row.Status }}"/>
+                                </td>
+                                <td>
+                                    <button class="btn btn-warning" type="submit">Update</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    {% endfor %}
+                </table>
+			</form>
+		</div>
+	</div>
+</div>
+{% endblock %}

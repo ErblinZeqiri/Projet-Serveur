@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% block title %} Affichage des demande {% endblock %}
+{% block body %}
+<div class="container">
+		<div class="col-md-12">
+			<p>
+				Liste des demandes de configuration de serveur :
+			</p>
+            <table class="table table-bordered table-sm">
+            {% if data %}
+                <thead>
+                    <tr>
+                        <th class="align-middle">
+                            ID Serveur
+                        </th>
+                        <th class="align-middle">
+                            Nom du Serveur
+                        </th>
+                        <th class="align-middle">
+                            Nombre de Port
+                        </th>
+                        <th class="align-middle">
+                            Nombre de U
+                        </th>
+                        <th class="align-middle">
+                            Date Configuration du Serveur
+                        </th>
+                        <th class="align-middle">
+                            Description
+                        </th>
+						<th class="align-middle">
+                            Puissance (Watt)
+                        </th>
+						<th class="align-middle">
+                            Date de demande
+                        </th>
+                    </tr>
+                </thead>
+            {% endif %}
+
+            {% for row in data %}
+				<tbody>
+					<tr>
+						<td class="align-middle">
+							{{ row.ID_Serveur }}
+						</td>
+						<td class="align-middle">
+							{{ row.Nom_Serv }}
+						</td>
+						<td class="align-middle">
+							{{ row.Nombre_Port|default("", True) }}
+						</td>
+						<td class="align-middle">
+							{{ row.Nombre_U|default("", True) }}
+						</td>
+						<td class="align-middle">
+							{{ row.Date_Conf_Serv|default("", True) }}
+						</td>
+						<td class="align-middle">
+							{{ row.Description|default("", True) }}
+						</td>
+						<td class="align-middle">
+							{{ row.Puissance|default("", True) }}
+						</td>
+						<td class="align-middle">
+							{{ row.Date_Serveur|default("", True) }}
+						</td>
+						<td class="align-middle">
+							<a class="btn btn-primary" href="{{ url_for('serveurs_add') }}" role="button">Ajouter</a>
+						</td>
+						<td class="align-middle">
+							<a class="btn btn-warning" href="{{ url_for('serveurs_edit', ID_Serveur_edit_html=row.ID_Serveur) }}" role="button">Edit</a>
+						</td>
+						<td class="text-center" class="align-middle">
+							<a class="btn btn-danger" href="{{ url_for('serveurs_select_delete', ID_Serveur_delete_html=row.ID_Serveur) }}" role="button">Delete</a>
+						</td>
+					</tr>
+				</tbody>
+            {% else %}
+				<tbody>
+					<tr>
+						<td>
+							Aucun serveur.
+						</td>
+						<td>
+							<a class="btn btn-primary" href="{{ url_for('serveurs_add') }}" role="button">Add</a>
+						</td>
+					</tr>
+				</tbody>
+            {% endfor %}
+			</table>
+		</div>
+</div>
+{% endblock %}

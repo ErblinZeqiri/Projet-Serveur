@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}Edit type d'equipement{% endblock %}
+{% block body %}
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<p>
+				Modifier le type d'equipement.
+			</p>
+			<form method="POST" action="{{ url_for('type_equipements_update') }}">
+                <table class="table table-bordered table-sm">
+                    <thead>
+                        <tr>
+                            <th>
+                                ID type d'equipement
+                            </th>
+                            <th>
+                                Type d'equipement
+                            </th>
+                        </tr>
+                    </thead>
+                    {% for row in data %}
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <input type="hidden" name= "ID_Type_Equipement_edit_html" value="{{ row.ID_Type_Equipement }}"/>
+                                </td>
+                                <td>
+                                    <input type = "text" name = "name_edit_Type_Equipement_html" value="{{ row.Type_Equipement }}"/>
+                                </td>
+                                <td>
+                                    <button class="btn btn-warning" type="submit">Update</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    {% endfor %}
+                </table>
+			</form>
+		</div>
+	</div>
+</div>
+{% endblock %}

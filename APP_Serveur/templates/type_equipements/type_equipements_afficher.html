@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block title %} Afficher Type d'Equipements {% endblock %}
+{% block body %}
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<p>
+				Liste des Type d'Equipements des serveurs.
+			</p>
+            <table class="table table-bordered table-sm">
+            {% if data %}
+                <thead>
+                    <tr>
+                        <th class="align-middle">
+                            ID Type Equipements
+                        </th>
+                        <th class="align-middle">
+                            Type d'Equipements
+                        </th>
+                    </tr>
+                </thead>
+            {% endif %}
+
+            {% for row in data %}
+				<tbody>
+					<tr>
+						<td class="align-middle">
+							{{ row.ID_Type_Equipement }}
+						</td>
+						<td class="align-middle">
+							{{ row.Type_Equipement }}
+						</td>
+						<td class="text-center" class="align-middle">
+							<a class="btn btn-primary" href="{{ url_for('type_equipements_add') }}" role="button">Ajouter</a>
+						</td>
+						<td class="text-center" class="align-middle">
+							<a class="btn btn-warning" href="{{ url_for('type_equipements_edit', ID_Type_Equipement_edit_html=row.ID_Type_Equipement) }}" role="button">Edit</a>
+						</td>
+						<td class="text-center" class="align-middle">
+							<a class="btn btn-danger" href="{{ url_for('type_equipements_select_delete', ID_Type_Equipement_delete_html=row.ID_Type_Equipement) }}" role="button">Delete</a>
+						</td>
+					</tr>
+				</tbody>
+            {% else %}
+				<tbody>
+					<tr>
+						<td>
+							Aucune type_equipement.
+						</td>
+						<td>
+							<a class="btn btn-primary" href="{{ url_for('type_equipements_add') }}" role="button">Ajouter</a>
+						</td>
+					</tr>
+				</tbody>
+            {% endfor %}
+			</table>
+		</div>
+	</div>
+</div>
+{% endblock %}
+

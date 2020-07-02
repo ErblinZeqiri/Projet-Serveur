@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title{% extends "base.html" %}
+{% block title %} Ajouter un emplacement{% endblock %}
+{% block body %}
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<p>
+				Ajouter un emplacement
+			</p>
+			<form method="POST">
+				<div class="form-group">
+					<label for="Location_html">Nom du demandeur</label>
+					<input type ="text" class="form-control" id="Location_html" name="Location_html" />
+				</div>
+				<button type="submit" class="btn btn-primary">
+					Enregistrer l'emplacement
+				</button>
+			</form>
+		</div>
+	</div>
+</div>
+{% endblock %}
+</title>
+</head>
+<body>
+
+</body>
+</html>

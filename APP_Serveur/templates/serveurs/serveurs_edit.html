@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block title %}Modification d'un serveur{% endblock %}
+{% block body %}
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<p>
+				Modifier ce serveur :
+			</p>
+			<form method="POST" action="{{ url_for('serveurs_update') }}">
+                <table class="table table-bordered table-sm">
+                    <thead>
+                        <tr>
+                            <th>
+                                ID Serveur
+                            </th>
+                            <th>
+                                Nom du serveur
+                            </th>
+                            <th>
+                                Nombre de port
+                            </th>
+                            <th>
+                                Nombre de U
+                            </th>
+                            <th>
+                                Date de Configuration
+                            </th>
+                            <th>
+                                Description
+                            </th>
+                            <th>
+                                Puissance (Watt)
+                            </th>
+                        </tr>
+                    </thead>
+                    {% for row in data %}
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <input type="hidden" name="ID_Serveur_edit_html" value="{{ row.ID_Serveur }}"/>
+                                </td>
+                                <td>
+                                    <input type = "text" name = "name_edit_Nom_Serv_html" value="{{ row.Nom_Serv }}"/>
+                                </td>
+                                <td>
+                                    <input type = "number" min="0" max="42" name = "name_edit_Nombre_Port_html" value="{{ row.Nombre_Port }}"/>
+                                </td>
+                                <td>
+                                    <input type = "number" min="0" max="42" name = "name_edit_Nombre_U_html" value="{{ row.Nombre_U }}"/>
+                                </td>
+                                <td>
+                                    <input type = "date" min="2020-07-03" name = "name_edit_Date_Conf_Serv_html" value="{{ row.Date_Conf_Serv }}"/>
+                                </td>
+                                <td>
+                                    <input type = "text" name = "name_edit_Description_html" value="{{ row.Description }}"/>
+                                </td>
+                                <td>
+                                    <input type = "text" name = "name_edit_Puissance_html" value="{{ row.Puissance }}"/>
+                                </td>
+                                <td>
+                                    <button class="btn btn-warning" type="submit">Update</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    {% endfor %}
+                </table>
+			</form>
+		</div>
+	</div>
+</div>
+{% endblock %}

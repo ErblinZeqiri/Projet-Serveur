@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% block title %} Affichage des demandeurs {% endblock %}
+{% block body %}
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<p>
+				Liste des demandeurs de configuration de serveur :
+			</p>
+            <table class="table table-bordered table-sm">
+            {% if data %}
+                <thead>
+                    <tr>
+                        <th class="align-middle">
+                            ID Demandeur
+                        </th>
+                        <th class="align-middle">
+                            Nom
+                        </th>
+                        <th class="align-middle">
+							Prénom
+                        </th>
+                        <th class="align-middle">
+							Date de naissance
+                        </th>
+                    </tr>
+                </thead>
+            {% endif %}
+
+            {% for row in data %}
+				<tbody>
+					<tr>
+						<td class="align-middle">
+							{{ row.ID_Personne }}
+						</td>
+						<td class="align-middle">
+							{{ row.Nom_Pers }}
+						</td>
+						<td class="align-middle">
+							{{ row.Prenom_Pers }}
+						</td>
+						<td class="align-middle">
+							{{ row.Date_Naissance_Pers }}
+						</td>
+						<td class="text-center" class="align-middle">
+							<a class="btn btn-primary" href="{{ url_for('personnes_add') }}" role="button">Ajouter</a>
+						</td>
+						<td class="text-center" class="align-middle">
+							<a class="btn btn-warning" href="{{ url_for('personnes_edit', ID_Personne_edit_html=row.ID_Personne) }}" role="button">Edit</a>
+						</td>
+						<td class="text-center" class="align-middle">
+							<a class="btn btn-danger" href="{{ url_for('personnes_select_delete', ID_Personne_delete_html=row.ID_Personne) }}" role="button">Delete</a>
+						</td>
+					</tr>
+				</tbody>
+            {% else %}
+				<tbody>
+					<tr>
+						<td>
+							Aucune personne.
+						</td>
+						<td>
+							<a class="btn btn-primary" href="{{ url_for('personnes_add') }}" role="button">Ajouter</a>
+						</td>
+					</tr>
+				</tbody>
+            {% endfor %}
+			</table>
+		</div>
+	</div>
+</div>
+{% endblock %}
+

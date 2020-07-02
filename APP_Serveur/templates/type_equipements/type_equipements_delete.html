@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}DELETE type d'equipement{% endblock %}
+{% block body %}
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<p>
+				Effacer ce type d'equipement.
+			</p>
+			<form method="POST" action="{{ url_for('type_equipements_delete') }}">
+                <table class="table table-bordered table-sm">
+                    <thead>
+                        <tr>
+                            <th>
+                                ID type d'equipement
+                            </th>
+                            <th>
+                                Type d'equipement
+                            </th>
+                        </tr>
+                    </thead>
+                    {% for row in data %}
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <input type="hidden" name="ID_Type_Equipement_delete_html" value="{{ row.ID_Type_Equipement }}"/>
+                                </td>
+                                <td>
+                                    {{ row.Type_Equipement }}
+                                </td>
+                                <td>
+                                    <button class="btn btn-danger" type="submit">EFFACER</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    {% endfor %}
+                </table>
+			</form>
+		</div>
+	</div>
+</div>
+{% endblock %}

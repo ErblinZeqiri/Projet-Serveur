@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block title %}DELETE Serveur{% endblock %}
+{% block body %}
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<p>
+				Effacer ce serveur.
+			</p>
+			<form method="POST" action="{{ url_for('serveurs_delete') }}">
+                <table class="table table-bordered table-sm">
+                    <thead>
+                        <tr>
+                            <th>
+                                ID Serveur
+                            </th>
+                            <th>
+                                Serveur
+                            </th>
+                        </tr>
+                    </thead>
+                    {% for row in data %}
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <input type="hidden" name="ID_Serveur_delete_html" value="{{ row.ID_Serveur }}"/>
+                                </td>
+                                <td>
+                                    {{ row.Nom_Serv }}
+                                </td>
+                                <td>
+                                    {{ row.Nombre_Port }}
+                                </td>
+                                <td>
+                                    {{ row.Nombre_U }}
+                                </td>
+                                <td>
+                                    {{ row.Date_Conf_Serv }}
+                                </td>
+                                <td>
+                                    {{ row.Description }}
+                                </td>
+                                <td>
+                                    {{ row.Puissance }}
+                                </td>
+                                <td>
+                                    {{ row.Date_Serveur }}
+                                </td>
+                                <td>
+                                    <button class="btn btn-danger" type="submit">EFFACER</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    {% endfor %}
+                </table>
+			</form>
+		</div>
+	</div>
+</div>
+{% endblock %}

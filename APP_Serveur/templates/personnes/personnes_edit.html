@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}Modification d'un demandeur{% endblock %}
+{% block body %}
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<p>
+				Modifier les identifications d'une personne :<br>
+                (Il faut au minimum avoir 16 ans donc les dates de naissance sont bloquées au 31.12.2004)
+			</p>
+			<form method="POST" action="{{ url_for('personnes_update') }}">
+                <table class="table table-bordered table-sm">
+                    <thead>
+                        <tr>
+                            <th>
+                                ID Personne
+                            </th>
+                            <th>
+                                Nom
+                            </th>
+                            <th>
+                                Prénom
+                            </th>
+                            <th>
+                                Date de naissance
+                            </th>
+                        </tr>
+                    </thead>
+                    {% for row in data %}
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <input type="hidden" name= "ID_Personne_edit_html" value="{{ row.ID_Personne }}"/>
+                                </td>
+                                <td>
+                                    <input type = "text" name = "name_edit_Nom_Pers_html" value="{{ row.Nom_Pers }}"/>
+                                </td>
+                                <td>
+                                    <input type = "text" name = "name_edit_Prenom_Pers_html" value="{{ row.Prenom_Pers }}"/>
+                                </td>
+                                <td>
+                                    <input type = "date" name = "name_edit_Date_Naissance_Pers_html" max="2004-12-31" value="{{ row.Date_Naissance_Pers }}"/>
+                                </td>
+                                <td>
+                                    <button class="btn btn-warning" type="submit">Update</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    {% endfor %}
+                </table>
+			</form>
+		</div>
+	</div>
+</div>
+{% endblock %}

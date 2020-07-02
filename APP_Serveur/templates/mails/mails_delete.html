@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}Suppression d'un mail{% endblock %}
+{% block body %}
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<p>
+				Effacer ce mail :
+			</p>
+			<form method="POST" action="{{ url_for('mails_delete') }}">
+                <table class="table table-bordered table-sm">
+                    <thead>
+                        <tr>
+                            <th>
+                                ID Mail
+                            </th>
+                            <th>
+                                Mail
+                            </th>
+                        </tr>
+                    </thead>
+                    {% for row in data %}
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <input type="hidden" name="ID_Mail_delete_html" value="{{ row.ID_Mail }}"/>
+                                </td>
+                                <td>
+                                    {{ row.Adresse_Mail }}
+                                </td>
+                                <td>
+                                    <button class="btn btn-danger" type="submit">EFFACER</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    {% endfor %}
+                </table>
+			</form>
+		</div>
+	</div>
+</div>
+{% endblock %}

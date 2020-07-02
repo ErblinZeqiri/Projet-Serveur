@@ -1,0 +1,152 @@
+{% extends "base.html" %}
+{% block title %} Afficher Serveurs Type_Equipements {% endblock %}
+{% block head %}
+    <!--
+        EZ 2020.07.14
+        On utilise le composant "tags-selector-tagselect" juste dans cette page,
+         il n'est pas nécessaire de la charger pour chaque page
+        c'est pourquoi il ne se trouve pas dans "base.html" mais ici
+        entre les balises JINJA "block head" "endblock"
+        -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='tags-selector-tagselect/jquery.tagselect.css') }}">
+    <script src="{{ url_for('static', filename='tags-selector-tagselect/jquery.tagselect.js') }}"></script>
+{% endblock %}
+{% block body %}
+
+
+<!--
+    EZ 2020.07.14
+    Il faut éviter de placer des instructions css n'importe où et surtout en plein milieu de nulle part,
+    pour dépanner l'application ce n'est vraiment pas top...
+    Mais Flask ne reconnaît pas les instructions ci-dessous lorsqu'elles sont dans un fichier externe
+-->
+
+    <style>
+        ol, ul, li {
+            list-style: none;
+        }
+    </style>
+
+
+<div class="container">
+		<div class="col-md-12">
+			<p>
+				Serveur.
+			</p>
+            <table class="table table-responsive-sm">
+                {% if data_serveur_selected %}
+                    <thead>
+                        <tr>
+                            <th class="" >
+                              ID
+                            </th>
+                            <th class="" >
+                              Nom du serveur
+                            </th>
+                            <th class="" >
+                              Nombre de Port
+                            </th>
+                            <th class="" >
+                              Nombre de U
+                            </th>
+                            <th class="" >
+                              Date Configuration du Serveur
+                            </th>
+                            <th class="" >
+                              Description
+                            </th>
+                            <th class="" >
+                              Puissance
+                            </th>
+                            <th class="" >
+                              Date de demande
+                            </th>
+                        </tr>
+                    </thead>
+            {% endif %}
+
+            {% for row in data_serveur_selected %}
+				<tbody>
+					<tr>
+						<th class="align-middle">
+						  {{ row.ID_Serveur }}
+					  </th>
+					  <th class="align-middle">
+						{{ row.Nom_Serv }}
+					  </th>
+					  <th class="align-middle">
+						{{ row.Nombre_Port }}
+					  </th>
+					  <th class="align-middle">
+						{{ row.Nombre_U }}
+					  </th>
+					  <th class="align-middle">
+						{{ row.Date_Conf_Serv }}
+					  </th>
+					  <th class="align-middle">
+						{{ row.Description }}
+					  </th>
+					  <th class="align-middle">
+						{{ row.Puissance }}
+					  </th>
+					  <th class="align-middle">
+						{{ row.Date_Serveur }}
+					  </th>
+					</tr>
+				</tbody>
+            {% else %}
+				<tbody>
+					<tr>
+						<td>
+							Aucune serveur.
+						</td>
+						<td>
+							<a class="btn btn-primary" href="{{ url_for('serveurs_add') }}" role="button">Add</a>
+						</td>
+					</tr>
+				</tbody>
+            {% endfor %}
+			</table>
+		</div>
+	</div>
+
+<div class="container">
+    <div class="row mx-md-n5">
+      <div class="col px-md-5">
+          <div class="p-3">
+            <form id="form_tags_select_confirm" action="{{ url_for('gf_update_type_equipement_serveur_selected') }}" method="POST">
+                <div class="qtagselect isw360">
+                    <select id="OM_JTSD" name="name_select_tags" class="qtagselect__select" multiple>
+                        {% for row in data_type_equipements_non_attribues %}
+                            <option value="{{ row.ID_Type_Equipement }}" name="name_tags_non_attribues_html" class="isblue" >{{ row.Type_Equipement }}</option>
+                        {% endfor %}
+
+                        {% for row in data_type_equipements_attribues %}
+                            <option value="{{ row.ID_Type_Equipement }}" name="name_tags_attribues_html" class="ispurple" selected>{{ row.Type_Equipement }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+            </form>
+          </div>
+      </div>
+      <div class="col px-md-5">
+          <div class="p-3">
+            <input type="submit" form="form_tags_select_confirm" class="btn btn-warning" value="Modifier">
+          </div>
+      </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascript %}
+<script>
+    $('.qtagselect__select').tagselect({
+    // Paramètres du composant : https://www.jqueryscript.net/form/tags-selector-tagselect.html
+    // maximum number of tags allowed to select
+      'maxTag': 100,
+    // error message,
+      'tagMessage': '100 tags au max !'
+    });
+</script>
+{% endblock %}
